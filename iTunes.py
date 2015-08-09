@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from appscript import app, k
-import time
 
 
 class States(object):
