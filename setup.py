@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
 	name='iTunesConnector',
-	version='1.0',
+	version='2.0',
 	install_requires=['appscript'],
 	py_modules=['iTunes'],
 	author="Philip Trauner",
