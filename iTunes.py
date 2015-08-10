@@ -3,6 +3,7 @@
 from appscript import app, k
 import sys
 
+
 class States(object):
 	class Playing(object):
 		def __get__(self, instance, owner):
@@ -37,26 +38,6 @@ class States(object):
 			if instance.itunes.player_state() == k.rewinding:
 				return True
 			return False
-
-
-class Info(object):
-	class CurrentTrack(object):
-		def __get__(self, instance, owner):
-			return Track(instance.itunes.current_track())
-
-
-	class CurrentPlaylist(object):
-		def __get__(self, instance, owner):
-			return Playlist(instance.itunes.current_playlist())
-
-
-	class Selection(object):
-		def __get__(self, instance, owner):
-			results = []
-			for i in instance.itunes.selection():
-				results.append(Track(i))
-			return results
-
 
 
 class PlaylistInfo(object):
@@ -163,6 +144,49 @@ class Playlist(object):
 	shared = PlaylistInfo.Shared()
 	smart = PlaylistInfo.Smart()
 	size = PlaylistInfo.Size()
+
+
+class ArtworkInfo(object):
+	class Data(object):
+		def __get__(self, instance, owner):
+			return instance.artwork.data_()
+
+
+	class Description(object):
+		def __get__(self, instance, owner):
+			return instance.artwork.description()
+
+
+	class Downloaded(object):
+		def __get__(self, instance, owner):
+			return instance.artwork.downloaded()
+
+
+	class Format(object):
+		def __get__(self, instance, owner):
+			return instance.artwork.format()
+
+
+	class Kind(object):
+		def __get__(self, instance, owner):
+			return instance.artwork.kind()
+
+
+	class RawData(object):
+		def __get__(self, instance, owner):
+			return instance.artwork.raw_data()
+
+
+class Artwork(object):
+	def __init__(self, artwork):
+		self.artwork = artwork
+	
+	data = ArtworkInfo.Data()
+	description = ArtworkInfo.Description()
+	downloaded = ArtworkInfo.Downloaded()
+	format = ArtworkInfo.Format()
+	kind = ArtworkInfo.Kind()
+	raw_data = ArtworkInfo.RawData()
 
 
 class TrackInfo(object):
@@ -466,6 +490,14 @@ class TrackInfo(object):
 			return instance.track.grouping()
 
 
+	class Artworks(object):
+		def __get__(self, instance, owner):
+			artworks = []
+			for i in instance.track.artworks():
+				artworks.append(Artwork(i))
+			return artworks
+
+
 class Track(object):
 	def __init__(self, track):
 		self.track = track
@@ -476,7 +508,7 @@ class Track(object):
 
 
 	def __repr__(self):
-		return self.track.name()
+		return self.track.name() + " - " + self.track.artist() + " - " + self.track.album()
 
 	name = TrackInfo.Name()
 	comment = TrackInfo.Comment()
@@ -538,6 +570,26 @@ class Track(object):
 	track_count = TrackInfo.TrackCount()
 	album_rating = TrackInfo.AlbumRating()
 	grouping = TrackInfo.Grouping()
+	artworks = TrackInfo.Artworks()
+
+
+class Info(object):
+	class CurrentTrack(object):
+		def __get__(self, instance, owner):
+			return Track(instance.itunes.current_track())
+
+
+	class CurrentPlaylist(object):
+		def __get__(self, instance, owner):
+			return Playlist(instance.itunes.current_playlist())
+
+
+	class Selection(object):
+		def __get__(self, instance, owner):
+			results = []
+			for i in instance.itunes.selection():
+				results.append(Track(i))
+			return results
 
 
 class iTunes(object):
@@ -580,17 +632,12 @@ class iTunes(object):
 		self.itunes.fast_forward()
 
 
+	def rewind(self):
+		self.itunes.rewind()
 
 
 	def quit(self):
 		self.itunes.quit()
-
-
-
-	def quit(self):
-		self.itunes.quit()
-
-
 
 
 
