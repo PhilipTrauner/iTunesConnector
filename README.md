@@ -42,7 +42,7 @@ Further down in the roadmap are:
 
 * ~~Play song by name~~
 * ~~Playlist info~~
-* Fetch Album artwork 
+* ~~Fetch Album artwork~~
 * Editing track tags (put off for now because I can't get it to work)
 
 ## Notes
