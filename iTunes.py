@@ -371,10 +371,6 @@ class Info(object):
 		def __get__(self, instance, owner):
 			return instance.itunes.current_track().grouping()
 
-"""
-class Playlist(object):
-	def __init__(self, )
-"""
 
 class Player(object):
 	def __init__(self, itunes):
@@ -391,6 +387,10 @@ class Player(object):
 
 	def quit(self):
 		self.itunes.quit()
+
+
+	def resume(self):
+		self.itunes.resume()
 
 
 	playing = States.Playing()
