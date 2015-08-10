@@ -12,30 +12,27 @@ Run install script
 python3 iTunesConnector/setup.py install
 ```
 
-## Usage 
+## Usage Example
 ```python
 from iTunes import iTunes
 
 itunes = iTunes()
 
 # Starting track
-itunes.player.playing = True
-# Get track name
-print(itunes.track.name)
-# Get track album
-print(itunes.track.album)
-# Get track artist
-print(itunes.track.artist)
-# Get track rating
-print(itunes.track.rating)
-# Skipping track
-itunes.player.next()
-# Previous track
-itunes.player.back()
-# Resuming track
-itunes.player.paused = False
-# Stopping track
-itunes.player.stopped = True
+itunes.play()
+# Get album of current track
+print(itunes.current_track.album)
+# Get length of current playlist
+print(itunes.current_playlist.time)
+# Get genre of currently highlighted tracks
+for song in itunes.selection:
+	print(song.genre)
+# Searching for songs related to "Monstercat"
+tracks = itunes.search(itunes.current_playlist, "Monstercat")
+# Printing out results
+print(tracks)
+# Plaing first result
+itunes.play(tracks[0])
 ```
 
 
@@ -43,10 +40,12 @@ itunes.player.stopped = True
 Currently only player state and track info can be fetched as well as basic player control.  
 Further down in the roadmap are: 
 
-* Play song by name
-* Playlist info
+* ~~Play song by name~~
+* ~~Playlist info~~
 * Fetch Album artwork 
+* Editing track tags (put off for now because I can't get it to work)
 
 ## Notes
 If you like **iTunes Connector** consider giving [Anshu Chimala](https://github.com/achimala) a hug.
 Thanks to his project [itunes-cli](https://github.com/achimala/itunes-cli) I was able to understand appscript much faster than I would normally have.
+
