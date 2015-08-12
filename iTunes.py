@@ -78,7 +78,10 @@ class PlaylistInfo(object):
 
 	class Tracks(object):
 		def __get__(self, instance, owner):
-			return instance.playlist.tracks()
+			results = []
+			for i in instance.playlist.tracks():
+				results.append(Track(i))
+			return results
 
 
 	class SongRepeat(object):
@@ -126,7 +129,7 @@ class Playlist(object):
 
 
 	def __repr__(self):
-		return self.playlist.name()
+		return "%s - %s tracks" % (self.playlist.name(), str(len(self.playlist.tracks())))
 
 
 	shuffle = PlaylistInfo.Shuffle()
@@ -508,7 +511,7 @@ class Track(object):
 
 
 	def __repr__(self):
-		return self.track.name() + " - " + self.track.artist() + " - " + self.track.album()
+		return "%s - %s - %s" % (self.track.name(), self.track.artist(), self.track.album())
 
 	name = TrackInfo.Name()
 	comment = TrackInfo.Comment()
