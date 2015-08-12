@@ -37,9 +37,6 @@ itunes.play(tracks[0])
 
 
 ## Todo
-Currently only player state and track info can be fetched as well as basic player control.  
-Further down in the roadmap are: 
-
 * ~~Play song by name~~
 * ~~Playlist info~~
 * ~~Fetch Album artwork~~
