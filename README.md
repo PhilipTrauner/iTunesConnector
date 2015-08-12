@@ -1,5 +1,5 @@
 # iTunes Connector
-Abstraction layer around appscript to control iTunes with *style*.
+Abstraction layer around ScriptingBridge to control iTunes with *style*.
 
 ## Installation
 Clone the repo
@@ -14,7 +14,7 @@ python3 iTunesConnector/setup.py install
 
 ## Usage Example
 ```python
-from iTunes import iTunes
+from iTunesConnector import iTunes
 
 itunes = iTunes()
 
@@ -27,12 +27,8 @@ print(itunes.current_playlist.time)
 # Get genre of currently highlighted tracks
 for song in itunes.selection:
 	print(song.genre)
-# Searching for songs related to "Monstercat"
-tracks = itunes.search(itunes.current_playlist, "Monstercat")
-# Printing out results
-print(tracks)
-# Plaing first result
-itunes.play(tracks[0])
+# Playing 11th track of current playlist
+itunes.play(itunes.current_playlist.tracks[10])
 ```
 
 
@@ -40,9 +36,13 @@ itunes.play(tracks[0])
 * ~~Play song by name~~
 * ~~Playlist info~~
 * ~~Fetch Album artwork~~
-* Editing track tags (put off for now because I can't get it to work)
+* ~~Editing track tags (put off for now because I can't get it to work)~~ (works now 😃)
+* Reimplement search
 
-## Notes
-If you like **iTunes Connector** consider giving [Anshu Chimala](https://github.com/achimala) a hug.
-Thanks to his project [itunes-cli](https://github.com/achimala/itunes-cli) I was able to understand appscript much faster than I would normally have.
+
+# Notes
+Python 3 is not supported anymore because appscript has been replaced by ScriptingBridge.
+iTunesConnector can be executed by a self compiled python installation in addition to the standard Python installation on OS X. 
+
+
 
