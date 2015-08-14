@@ -558,6 +558,10 @@ class Track(object):
 		return unicode("%s - %s" % (self.track.name(), self.track.artist())).encode("utf-8")
 
 
+	def add_to_playlist(self, playlist):
+		self.track.duplicateTo_(playlist.playlist)
+
+
 	eq = TrackInfo.EQ()
 	album = TrackInfo.Album()
 	album_artist = TrackInfo.AlbumArtist()
@@ -707,6 +711,10 @@ class Playlist(object):
 		return unicode("%s - %s tracks" % (self.playlist.name(), str(len(self.playlist.tracks())))).encode("utf-8")
 
 
+	def add(self, track):
+		track.add_to_playlist(self)
+
+
 	duration = PlaylistInfo.Duration()
 	loved = PlaylistInfo.Loved()
 	name = PlaylistInfo.Name()
@@ -786,6 +794,13 @@ class iTunes(object):
 
 	def quit(self):
 		self.itunes.quit()
+
+
+	def create_playlist(self, name):
+		playlist = self.itunes.classForScriptingClass_("playlist").alloc().initWithProperties_({"name" : name})
+		self.itunes.sources()[0].playlists().insertObject_atIndex_(playlist, 0)
+		return Playlist(playlist)
+
 
 
 	playing = States.Playing()
