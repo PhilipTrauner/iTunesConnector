@@ -36,7 +36,7 @@ itunes.play(itunes.current_playlist.tracks[10])
 * ~~Play song by name~~
 * ~~Playlist info~~
 * ~~Fetch Album artwork~~
-* ~~Editing track tags (put off for now because I can't get it to work)~~ (works now 😃)
+* ~~Editing track tags (put off for now because I can't get it to work)~~ (works now)
 * Reimplement search
 
 
