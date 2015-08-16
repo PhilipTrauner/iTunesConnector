@@ -32,5 +32,20 @@ itunes.play(itunes.current_playlist.tracks[10])
 ```
 
 
+<<<<<<< HEAD
+=======
+## Todo
+* ~~Play song by name~~
+* ~~Playlist info~~
+* ~~Fetch Album artwork~~
+* ~~Editing track tags (put off for now because I can't get it to work)~~ (works now)
+* Reimplement search
+
+
+# Notes
+Python 3 is not supported anymore because appscript has been replaced by ScriptingBridge.
+iTunesConnector can be executed by a self compiled python installation in addition to the standard Python installation on OS X. 
+
+>>>>>>> 5083421095f5c62986e1f8c9d509a186a84ca460
 
 
