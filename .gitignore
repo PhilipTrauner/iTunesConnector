@@ -4,4 +4,4 @@ testing.py
 build
 dist
 *.egg-info
-parse.*
+*parse*
