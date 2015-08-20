@@ -9,7 +9,7 @@ git clone https://github.com/PhilipTrauner/iTunesConnector
 
 Run install script
 ```
-python3 iTunesConnector/setup.py install
+python iTunesConnector/setup.py install
 ```
 
 ## Usage Example
