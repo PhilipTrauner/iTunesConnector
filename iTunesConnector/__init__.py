@@ -27,6 +27,7 @@ class iTunesInfo(object):
 				results.append(Track(i))
 			return results
 
+
 	class AirPlayDevices(object):
 		def __get__(self, instance, owner):
 			results = []
