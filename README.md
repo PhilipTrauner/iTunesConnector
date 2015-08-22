@@ -7,9 +7,14 @@ Clone the repo
 git clone https://github.com/PhilipTrauner/iTunesConnector
 ```
 
+Navigate into cloned repo
+```
+cd iTunesConnector
+``` 
+
 Run install script
 ```
-python iTunesConnector/setup.py install
+python setup.py install
 ```
 
 ## Usage Example
