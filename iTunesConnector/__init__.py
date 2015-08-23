@@ -1,12 +1,13 @@
 import sys
-sys.path.append('/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC')
+if sys.version[:3] == "2.7":
+	sys.path.append('/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC')
 from ScriptingBridge import SBApplication
-from States import States
-from Playlist import Playlist
-from Track import Track
-from AirplayDevice import AirplayDevice
-from iTunes import iTunesItem
-from Window import Window
+from iTunesConnector.States import States
+from iTunesConnector.Playlist import Playlist
+from iTunesConnector.Track import Track
+from iTunesConnector.AirplayDevice import AirplayDevice
+from iTunesConnector.iTunes import iTunesItem
+from iTunesConnector.Window import Window
 
 
 class iTunesInfo(object):
@@ -68,10 +69,10 @@ class iTunesInfo(object):
 
 	class CurrentAirPlayDevices(object):
 		def __get__(self, instance, owner):
-			return instance.itunes.currentAirPlayDevices()
+			return AirplayDevice(instance.itunes.currentAirPlayDevices())
 
 		def __set__(self, instance, value):
-			instance.itunes.setCurrentAirPlayDevices_(value)
+			instance.itunes.setCurrentAirPlayDevices_(value.airplay_device)
 
 
 	class CurrentEQPreset(object):
@@ -218,7 +219,7 @@ class iTunes(iTunesItem):
 	
 
 	def play(self, item=None):
-		if item:
+		if item != None:
 			if isinstance(item, Track):
 				item.track.playOnce_(None)
 			elif isinstance(item, Playlist):
@@ -265,6 +266,48 @@ class iTunes(iTunesItem):
 		playlist = self.itunes.classForScriptingClass_("playlist").alloc().initWithProperties_({"name" : name})
 		self.itunes.sources()[0].playlists().insertObject_atIndex_(playlist, 0)
 		return Playlist(playlist)
+
+
+	def search(self, name=None, album=None, artist=None, genre=None, loved=None):
+		loved_matches = []
+		if loved != None:
+			for track in self.current_playlist.tracks:
+				if loved:
+					if track.loved:
+						loved_matches.append(track)
+				else:
+					if not track.loved:
+						loved_matches.append(track)
+		else:
+			loved_matches = self.current_playlist.tracks
+		genre_matches = []
+		if genre != None:
+			for track in loved_matches:
+				if genre.lower() in track.genre.lower():
+					genre_matches.append(track)
+		else:
+			genre_matches = loved_matches
+		artist_matches = []
+		if artist != None:
+			for track in genre_matches:
+				if artist.lower() in track.artist.lower():
+					artist_matches.append(track)
+		else:
+			artist_matches = genre_matches
+		album_matches = []
+		if album != None:
+			for track in artist_matches:
+				if album.lower() in track.album.lower():
+					album_matches.append(track)
+		else:
+			album_matches = artist_matches
+		name_matches = []
+		if name != None:
+			for track in album_matches:
+				if name.lower() in track.name.lower():
+					name_matches.append(track)
+			return name_matches
+		return album_matches
 
 
 	playing = States.Playing()
