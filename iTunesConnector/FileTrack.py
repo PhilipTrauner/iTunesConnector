@@ -1,4 +1,4 @@
-from Track import Track
+from iTunesConnector.Track import Track
 
 
 class FileTrackInfo(object):

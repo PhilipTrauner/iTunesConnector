@@ -1,5 +1,5 @@
-from iTunes import iTunesItem
-
+from iTunesConnector.iTunes import iTunesItem
+from iTunesConnector.Artwork import Artwork
 
 class TrackInfo(object):
 	class EQ(object):
@@ -460,7 +460,7 @@ class Track(iTunesItem):
 
 
 	def __repr__(self):
-		return unicode("%s - %s" % (self.track.name(), self.track.artist())).encode("utf-8")
+		return "%s - %s" % (self.track.name(), self.track.artist())
 
 
 	def add_to_playlist(self, playlist):

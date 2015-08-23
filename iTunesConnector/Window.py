@@ -1,4 +1,4 @@
-from iTunes import iTunesItem
+from iTunesConnector.iTunes import iTunesItem
 
 class WindowInfo(object):
 	class Bounds(object):

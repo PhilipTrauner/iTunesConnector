@@ -1,5 +1,5 @@
-from iTunes import iTunesItem
-from Track import Track
+from iTunesConnector.iTunes import iTunesItem
+from iTunesConnector.Track import Track
 
 
 class PlaylistInfo(object):
@@ -72,7 +72,7 @@ class Playlist(iTunesItem):
 
 
 	def __repr__(self):
-		return unicode("%s - %s tracks" % (self.playlist.name(), str(len(self.playlist.tracks())))).encode("utf-8")
+		return "%s - %s tracks" % (self.playlist.name(), str(len(self.playlist.tracks())))
 
 
 	def add_track(self, track):

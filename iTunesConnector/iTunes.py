@@ -17,7 +17,7 @@ class iTunesItem(object):
 
 
 	def __str__(self):
-		return unicode(self).encode('utf-8')
+		return self.item.name()
 
 
 	def delete(self):

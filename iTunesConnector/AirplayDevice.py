@@ -1,4 +1,4 @@
-from iTunes import iTunesItem
+from iTunesConnector.iTunes import iTunesItem
 
 class AirplayDeviceInfo(object):
 	class Active(object):
@@ -56,9 +56,7 @@ class AirplayDevice(iTunesItem):
 	def __init__(self, airplay_device):
 		self.airplay_device = airplay_device
 		self.item = self.airplay_device
-
-	def __repr__(self):
-		return unicode("")
+		
 
 	active = AirplayDeviceInfo.Active()
 	available = AirplayDeviceInfo.Available()
