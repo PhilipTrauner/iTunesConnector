@@ -12,12 +12,12 @@ class iTunesItem(object):
 		self.item = item
 
 
-	def __unicode__(self):
+	def __repr__(self):
 		return self.item.name()
 
 
 	def __str__(self):
-		return unicode(self).encode('utf-8')
+		return self.item.name()
 
 
 	def delete(self):
