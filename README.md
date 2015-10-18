@@ -1,3 +1,6 @@
+### Disclaimer
+Please don't use this. I'm currently working on a much better solution that doesn't require over 2000 lines of code and works with every ScriptingBridge capable application.
+
 # iTunes Connector
 Abstraction layer around ScriptingBridge to control iTunes with *style*.
 
